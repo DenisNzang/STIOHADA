@@ -1,0 +1,2132 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="STIOHADA - Portal especializado en el Sistema Contable OHADA (SYSCOHADA). Plan de cuentas, acto uniforme, tratamientos contables y ejemplos prácticos.">
+  <meta name="keywords"
+    content="OHADA, contabilidad, SYSCOHADA, plan de cuentas, acto uniforme, tratamientos contables, asientos contables, África, derecho mercantil">
+  <meta name="author" content="Denis Nzang Camps">
+  <meta name="robots" content="index, follow">
+  <title>STIOHADA - Sistema Contable OHADA</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/dataTables.bootstrap5.css">
+  <link rel="stylesheet" href="css/buttons.bootstrap5.css">
+  <style>
+    :root {
+      --color-primario: #FF6600;
+      --color-secundario: #2c3e50;
+      --color-texto: #34495e;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--color-texto);
+      padding-top: 70px;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: var(--color-secundario);
+      font-weight: 600;
+    }
+
+    .navbar {
+      background-color: #fff;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-brand {
+      font-weight: bold;
+      color: var(--color-primario) !important;
+      font-size: 1.5rem;
+    }
+
+    .navbar-brand .nohighlight {
+      font-weight: bold;
+      color: var(--color-secundario) !important;
+      font-size: 1.5rem;
+    }
+
+    .nav-link {
+      color: var(--color-secundario) !important;
+      transition: color 0.3s ease, background-color 0.3s ease;
+      margin: 0 5px;
+      padding: 8px 15px !important;
+      border-radius: 5px;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--color-primario) !important;
+      background-color: rgba(255, 102, 0, 0.05);
+    }
+
+    .section {
+      padding: 80px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    #inicio {
+      height: calc(100vh - 70px);
+      background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('img/bg.png');
+      background-color: #333;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      padding: 0;
+    }
+
+    #inicio h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    #inicio .lead {
+      font-size: 1.5rem;
+    }
+
+    #inicio .highlight {
+      color: var(--color-primario);
+      font-weight: bold;
+    }
+
+    .btn-primary {
+      background-color: var(--color-primario);
+      border-color: var(--color-primario);
+    }
+
+    .btn-primary:hover {
+      background-color: #e65c00;
+      border-color: #e65c00;
+    }
+
+    .dt-buttons .btn {
+      background-color: var(--color-secundario);
+      color: #fff;
+      margin-right: 5px;
+    }
+
+    .dt-buttons .btn:hover {
+      background-color: #4a6a8a;
+    }
+
+    #ejemplos .nav-tabs .nav-link {
+      color: var(--color-secundario);
+    }
+
+    #ejemplos .nav-tabs .nav-link.active {
+      color: var(--color-primario);
+      border-color: var(--color-primario) var(--color-primario) #fff;
+    }
+
+    .asiento-table {
+      margin-top: 20px;
+    }
+
+    .asiento-table th {
+      background-color: var(--color-secundario);
+      color: white;
+    }
+
+    .asiento-table .text-end {
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    .total-row {
+      background-color: var(--accent-color);
+      color: white;
+      font-weight: bold;
+    }
+
+    footer {
+      background-color: var(--color-secundario);
+      color: #fff;
+      padding: 30px 0;
+      text-align: center;
+    }
+
+    footer a {
+      color: var(--color-primario);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#inicio">STI<span class="nohighlight">OHADA</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="#inicio">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#plan-de-cuentas">Plan de Cuentas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#acto-uniforme">Acto Uniforme</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#tratamientos-contables">Operaciones</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#ejemplos">Asientos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#enlaces">Enlaces</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <main>
+    <section id="inicio">
+      <div class="container">
+        <h1 class="display-4">Bienvenido a
+          <span class="highlight">STI</span>OHADA
+        </h1>
+        <p class="lead my-4">El portal de referencia para el Sistema Contable OHADA.
+          <br>Toda la información que necesita,
+          <span class="highlight">completamente en español</span>
+          <br><br>¡Regístrate y accede a contenidos exclusivos!
+        </p>
+        <a href="#registro" class="btn btn-primary btn-lg">Registro</a>
+      </div>
+    </section>
+    <section id="plan-de-cuentas" class="section">
+      <div class="container">
+        <h2 class="text-center mb-5">Plan de Cuentas OHADA (Extracto)</h2>
+        <div class="table-responsive">
+          <table id="tabla-cuentas" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Descripción</th>
+                <th>Masa Patrimonial</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>10</td>
+                <td>Capital</td>
+                <td>Neto</td>
+              </tr>
+              <tr>
+                <td>101</td>
+                <td>Capital social</td>
+                <td>Neto</td>
+              </tr>
+              <tr>
+                <td>1011</td>
+                <td>Capital suscrito no desembolsado</td>
+                <td>Neto</td>
+              </tr>
+              <tr>
+                <td>1012</td>
+                <td>Capital suscrito, exigido, no desembolsado</td>
+                <td>Neto</td>
+              </tr>
+              <tr>
+                <td>1013</td>
+                <td>Capital suscrito, exigido, desembolsado, no amortizado</td>
+                <td>Neto</td>
+              </tr>
+              <tr>
+                <td>102</td>
+                <td>Capital por dotación</td>
+                <td>Neto</td>
+              </tr>
+              <tr>
+                <td>1021</td>
+                <td>Dotación inicial</td>
+                <td>Neto</td>
+              </tr>
+              <tr>
+                <td>1022</td>
+                <td>Indemnizaciones complementarias</td>
+                <td>Neto</td>
+              </tr>
+              <tr>
+                <td>1028</td>
+                <td>Otras asignaciones</td>
+                <td>Neto</td>
+              </tr>
+              <tr>
+                <td>11</td>
+                <td>Reservas</td>
+                <td>Neto</td>
+              </tr>
+              <tr>
+                <td>111</td>
+                <td>Reserva legal</td>
+                <td>Neto</td>
+              </tr>
+              <tr>
+                <td>112</td>
+                <td>Reservas estatutarias o contractuales</td>
+                <td>Neto</td>
+              </tr>
+              <tr>
+                <td>113</td>
+                <td>Reservas reguladas</td>
+                <td>Neto</td>
+              </tr>
+              <tr>
+                <td>1131</td>
+                <td>Reservas netas para plusvalías a largo plazo</td>
+                <td>Neto</td>
+              </tr>
+              <tr>
+                <td>1132</td>
+                <td>Reservas para asignación de acciones gratuitas a empleados y directivos</td>
+                <td>Neto</td>
+              </tr>
+              <tr>
+                <td>1133</td>
+                <td>Reservas resultantes de la concesión de subvenciones a la inversión</td>
+                <td>Neto</td>
+              </tr>
+              <tr>
+                <td>12</td>
+                <td>Beneficios no distribuidos</td>
+                <td>Neto</td>
+              </tr>
+              <tr>
+                <td>121</td>
+                <td>Beneficios no distribuidos</td>
+                <td>Neto</td>
+              </tr>
+              <tr>
+                <td>129</td>
+                <td>Déficit prorrogado</td>
+                <td>Neto</td>
+              </tr>
+              <tr>
+                <td>1291</td>
+                <td>Pérdida neta prorrogada</td>
+                <td>Neto</td>
+              </tr>
+              <tr>
+                <td>1292</td>
+                <td>Pérdida Amortización diferida</td>
+                <td>Neto</td>
+              </tr>
+              <tr>
+                <td>13</td>
+                <td>Beneficio neto del ejercicio</td>
+                <td>Neto</td>
+              </tr>
+              <tr>
+                <td>130</td>
+                <td>Beneficios pendientes de asignación</td>
+                <td>Neto</td>
+              </tr>
+              <tr>
+                <td>1301</td>
+                <td>Resultado pendiente de asignación: beneficio</td>
+                <td>Neto</td>
+              </tr>
+              <tr>
+                <td>1309</td>
+                <td>Resultado pendiente de consignación: pérdida</td>
+                <td>Neto</td>
+              </tr>
+              <tr>
+                <td>131</td>
+                <td>Beneficio neto</td>
+                <td>Neto</td>
+              </tr>
+              <tr>
+                <td>132</td>
+                <td>Margen comercial (TM)</td>
+                <td>Neto</td>
+              </tr>
+              <tr>
+                <td>133</td>
+                <td>Valor añadido (VA)</td>
+                <td>Neto</td>
+              </tr>
+              <tr>
+                <td>14</td>
+                <td>Subvenciones a la inversión</td>
+                <td>Neto</td>
+              </tr>
+              <tr>
+                <td>141</td>
+                <td>Subvenciones para equipamiento</td>
+                <td>Neto</td>
+              </tr>
+              <tr>
+                <td>1411</td>
+                <td>Estado</td>
+                <td>Neto</td>
+              </tr>
+              <tr>
+                <td>1412</td>
+                <td>Províncias</td>
+                <td>Neto</td>
+              </tr>
+              <tr>
+                <td>1413</td>
+                <td>Distritos</td>
+                <td>Neto</td>
+              </tr>
+              <tr>
+                <td>148</td>
+                <td>Otras subvenciones a la inversión</td>
+                <td>Neto</td>
+              </tr>
+              <tr>
+                <td>15</td>
+                <td>Provisiones reguladas y fondos similares</td>
+                <td>Pasivo</td>
+              </tr>
+              <tr>
+                <td>151</td>
+                <td>Amortización acelerada</td>
+                <td>Pasivo</td>
+              </tr>
+              <tr>
+                <td>152</td>
+                <td>Plusvalías de cesión a reinvertir</td>
+                <td>Pasivo</td>
+              </tr>
+              <tr>
+                <td>153</td>
+                <td>Fondos regulados</td>
+                <td>Pasivo</td>
+              </tr>
+              <tr>
+                <td>1531</td>
+                <td>Fondo Nacional</td>
+                <td>Pasivo</td>
+              </tr>
+              <tr>
+                <td>1532</td>
+                <td>Tasa para el presupuesto</td>
+                <td>Pasivo</td>
+              </tr>
+              <tr>
+                <td>16</td>
+                <td>Empréstitos y obligaciones similares</td>
+                <td>Pasivo</td>
+              </tr>
+              <tr>
+                <td>161</td>
+                <td>Emisiones de obligaciones</td>
+                <td>Pasivo</td>
+              </tr>
+              <tr>
+                <td>1611</td>
+                <td>Emisiones de obligaciones ordinarias</td>
+                <td>Pasivo</td>
+              </tr>
+              <tr>
+                <td>1612</td>
+                <td>Bonos convertibles en acciones</td>
+                <td>Pasivo</td>
+              </tr>
+              <tr>
+                <td>1613</td>
+                <td>Bonos reembolsables en acciones</td>
+                <td>Pasivo</td>
+              </tr>
+              <tr>
+                <td>162</td>
+                <td>Empréstitos de entidades de crédito</td>
+                <td>Pasivo</td>
+              </tr>
+              <tr>
+                <td>17</td>
+                <td>Pasivos por arrendamiento financiero</td>
+                <td>Pasivo</td>
+              </tr>
+              <tr>
+                <td>172</td>
+                <td>Pasivos por arrendamiento de inmuebles</td>
+                <td>Pasivo</td>
+              </tr>
+              <tr>
+                <td>173</td>
+                <td>Pasivos por arrendamiento financiero</td>
+                <td>Pasivo</td>
+              </tr>
+              <tr>
+                <td>174</td>
+                <td>Obligaciones por arrendamiento-compraventa</td>
+                <td>Pasivo</td>
+              </tr>
+              <tr>
+                <td>18</td>
+                <td>Pasivos relacionados con participaciones y cuentas de enlace</td>
+                <td>Pasivo</td>
+              </tr>
+              <tr>
+                <td>181</td>
+                <td>Pasivos asociados a participaciones</td>
+                <td>Pasivo</td>
+              </tr>
+              <tr>
+                <td>1811</td>
+                <td>Pasivos asociados a participaciones (grupo)</td>
+                <td>Pasivo</td>
+              </tr>
+              <tr>
+                <td>1812</td>
+                <td>Pasivos relacionados con participaciones (no grupo)</td>
+                <td>Pasivo</td>
+              </tr>
+              <tr>
+                <td>182</td>
+                <td>Deudas con empresas conjuntas</td>
+                <td>Pasivo</td>
+              </tr>
+              <tr>
+                <td>19</td>
+                <td>Provisiones para riesgos y gastos</td>
+                <td>Pasivo</td>
+              </tr>
+              <tr>
+                <td>191</td>
+                <td>Provisiones para litigios</td>
+                <td>Pasivo</td>
+              </tr>
+              <tr>
+                <td>192</td>
+                <td>Provisiones para garantías dadas a clientes</td>
+                <td>Pasivo</td>
+              </tr>
+              <tr>
+                <td>193</td>
+                <td>Provisiones para pérdidas en contratos con finalización futura</td>
+                <td>Pasivo</td>
+              </tr>
+              <tr>
+                <td>21</td>
+                <td>Inmovilizado inmaterial</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>211</td>
+                <td>Gastos de desarrollo</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>212</td>
+                <td>Patentes, licencias, concesiones y derechos similares</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>2121</td>
+                <td>Patentes</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>2122</td>
+                <td>Licencias</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>2123</td>
+                <td>Concesiones de servicios públicos</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>22</td>
+                <td>Terrenos</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>221</td>
+                <td>Terrenos agrícolas y forestales</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>2211</td>
+                <td>Granjas</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>2212</td>
+                <td>Terrenos forestales</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>2218</td>
+                <td>Otros terrenos</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>222</td>
+                <td>Terrenos baldíos</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>2221</td>
+                <td>Terrenos edificables</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>2228</td>
+                <td>Otros terrenos baldíos</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>23</td>
+                <td>Edificios, instalaciones técnicas y accesorios</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>231</td>
+                <td>Edificios industriales, agrícolas, administrativos y comerciales en terrenos propios</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>2311</td>
+                <td>Edificios industriales</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>2312</td>
+                <td>Edificios agrícolas</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>2313</td>
+                <td>Edificios administrativos y comerciales</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>232</td>
+                <td>Edificios industriales, agrícolas, administrativos y comerciales en terrenos no edificados</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>2321</td>
+                <td>Edificios industriales</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>2322</td>
+                <td>Edificios agrícolas</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>2323</td>
+                <td>Edificios administrativos y comerciales</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>24</td>
+                <td>Equipamiento, mobiliario y activos biológicos</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>241</td>
+                <td>Maquinaria y equipos industriales y comerciales</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>2411</td>
+                <td>Equipamiento industrial</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>2412</td>
+                <td>Herramientas industriales</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>2413</td>
+                <td>Equipamiento comercial</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>242</td>
+                <td>Maquinaria y equipos agrícolas</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>2421</td>
+                <td>Equipamiento agrícola</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>2422</td>
+                <td>Herramientas agrícolas</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>2426</td>
+                <td>Maquinaria y equipos agrícolas en arrendamiento financiero</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>25</td>
+                <td>Anticipos y depósitos pagados sobre inmovilizado</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>251</td>
+                <td>Anticipos y depósitos pagados sobre inmovilizado inmaterial</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>252</td>
+                <td>Anticipos y depósitos pagados sobre el inmovilizado material</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>26</td>
+                <td>Inversiones de capital</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>261</td>
+                <td>Inversiones en empresas bajo control exclusivo</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>262</td>
+                <td>Inversiones en entidades controladas conjuntamente</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>263</td>
+                <td>Inversiones en empresas sobre las que se ejerce una influencia significativa</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>27</td>
+                <td>Otras inversiones a largo plazo</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>271</td>
+                <td>Préstamos y títulos de crédito</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>2711</td>
+                <td>Préstamos participativos</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>2712</td>
+                <td>Préstamos a empresas asociadas</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>2713</td>
+                <td>Notas de fondos</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>272</td>
+                <td>Préstamos a los empleados</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>2721</td>
+                <td>Préstamos inmobiliarios</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>2722</td>
+                <td>Préstamos para equipos e instalaciones</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>2728</td>
+                <td>Otros préstamos al personal</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>28</td>
+                <td>Amortización</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>281</td>
+                <td>Amortización del inmovilizado inmaterial</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>2811</td>
+                <td>Amortización de costes de desarrollo</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>2812</td>
+                <td>Amortización de patentes, licencias, concesiones y derechos similares</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>2813</td>
+                <td>Amortización de programas informáticos y sitios web</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>282</td>
+                <td>Amortización de terrenos</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>2824</td>
+                <td>Amortización de los trabajos de recuperación de tierras</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>29</td>
+                <td>Deterioro del inmovilizado</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>291</td>
+                <td>Deterioro de activos inmateriales</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>2911</td>
+                <td>Deterioro de los costes de desarrollo</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>2912</td>
+                <td>Pérdida de valor de patentes, licencias, concesiones y derechos similares</td>
+                <td>Activo</td>
+              </tr>
+              <tr>
+                <td>2913</td>
+                <td>Deterioro de programas informáticos y sitios web</td>
+                <td>Activo</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <section id="acto-uniforme" class="section bg-light">
+      <div class="container">
+        <h2 class="text-center mb-5">Acto Uniforme (Primeros 20 Artículos)</h2>
+        <div class="table-responsive">
+          <table id="tabla-articulos" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+              <tr>
+                <th style="width: 10%;">Artículo</th>
+                <th>Contenido</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Toda entidad en el sentido del artículo 2 siguiente estará sujeta a las disposiciones del presente
+                  Acto Uniforme y establecerá, para información externa y para su propio uso, una contabilidad general
+                  conforme a dicho Acto Uniforme.<br><br>Para ello:<br><br>
+                  <ul>
+                    <li>Clasifica, registra y contabiliza los hechos que se constatan y todas las transacciones, que
+                      implican movimientos de valor, que son tratadas por terceros o que se registran o realizan en el
+                      marco de su gestión interna;</li><br>
+                    <li>Proporciona, tras el tratamiento adecuado de estas operaciones, los informes a los que está
+                      sujeta por ley o por sus estatutos, así como la información requerida por los distintos usuarios.
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Las entidades sujetas a las disposiciones del Acto uniforme relativo al derecho mercantil general,
+                  del Acto uniforme relativo al derecho de las sociedades comerciales y las agrupaciones de interés
+                  económico y del Acto uniforme relativo al derecho de las sociedades cooperativas están obligadas a
+                  establecer una contabilidad, denominada contabilidad financiera, las entidades públicas, semipúblicas
+                  y semipúblicas y, de forma más general, las entidades productoras de bienes y servicios de mercado o
+                  no de mercado, en la medida en que ejerzan, con o sin ánimo de lucro, actividades económicas a título
+                  principal o accesorio que se basen en actos repetitivos, con excepción de los sujetos a las normas de
+                  contabilidad pública.</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>De acuerdo con el principio de prudencia, las cuentas deben cumplir las obligaciones de regularidad,
+                  equidad y transparencia inherentes a la conservación, control, presentación y comunicación de la
+                  información que tratan.</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Para garantizar la fiabilidad, comprensibilidad y comparabilidad de la información, la contabilidad
+                  de cada entidad implica:<br><br>
+                  <ul>
+                    <li>El respeto de una terminología y de unos principios rectores comunes a todas las entidades
+                      interesadas de los Estados partes en el Tratado de Armonización del Derecho Mercantil en África;
+                    </li><br>
+                    <li>La aplicación de postulados, convenciones, métodos y procedimientos normalizables por sectores
+                      profesionales;</li><br>
+                    <li>Una organización que cumpla en todo momento los requisitos de recogida, conservación, auditoría,
+                      presentación y comunicación de la información contable relativa a las operaciones de la entidad a
+                      que se refiere el artículo 1.</li>
+                  </ul>
+                </td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Se instituye un sistema contable único, común a todos los Estados contratantes y compuesto por el
+                  Plan General de Contabilidad OHADA y el Arreglo Contable para Cuentas Consolidadas y Combinadas,
+                  denominado Sistema Contable OHADA, en forma abreviada SYSCOHADA, y anejo al presente Acto
+                  Uniforme.<br><br>El objetivo de SYSCOHADA es la recogida, mantenimiento, control, presentación y
+                  comunicación por parte de las entidades de la información financiera establecida en las mismas
+                  condiciones de fiabilidad, comprensión y comparabilidad.<br><br>Sin embargo, las entidades de crédito,
+                  las instituciones microfinancieras, los agentes del mercado financiero, las compañías de seguros y
+                  reaseguros, los organismos de previsión y seguridad social y las entidades sin ánimo de lucro no están
+                  sujetos a SYSCOHADA.<br><br>El Plan General de Contabilidad de la OHADA y las Normas Contables para
+                  las Cuentas Consolidadas y Combinadas se actualizarán periódicamente, mediante decisión, por consejo o
+                  recomendación del Comité de Formalización Contable de la OHADA, de conformidad con el Reglamento
+                  n°002/2009 relativo a la creación,organización y funcionamiento de dicho Comité.</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>La aplicación del sistema contable OHADA implica que:<br><br>
+                  <ul>
+                    <li>Se observa en todos los casos el principio de prudencia, basado en una evaluación razonable de
+                      los acontecimientos y transacciones que deben registrarse durante el ejercicio;</li><br>
+                    <li>La entidad cumple las normas y procedimientos vigentes y los aplica de buena fe;</li><br>
+                    <li>Los responsables de la contabilidad establezcan y apliquen procedimientos de control interno
+                      esenciales para el conocimiento que normalmente deben tener de la realidad y la importancia de los
+                      hechos, transacciones y situaciones relacionados con la actividad de la entidad;</li><br>
+                    <li>La información se presenta y comunica con claridad, sin intención de ocultar la realidad tras la
+                      apariencia.</li>
+                  </ul>
+                </td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td>Los estados financieros de síntesis reúnen la información financiera al menos una vez al año durante
+                  un periodo de doce meses, conocido como ejercicio; se denominan estados financieros anuales.<br><br>El
+                  ejercicio coincide con el año natural.<br><br>La duración del ejercicio es excepcionalmente inferior a
+                  doce meses para el primer ejercicio que comienza durante el primer semestre del año civil. Este
+                  periodo puede ser superior a doce meses para el primer ejercicio que comience en la segunda mitad del
+                  año.<br><br>En caso de cese de actividad, cualquiera que sea el motivo, la duración de las operaciones
+                  de liquidación se contabilizan como un único ejercicio, sin perjuicio del establecimiento de estados
+                  anuales provisionales.</td>
+              </tr>
+              <tr>
+                <td>8</td>
+                <td>Un conjunto completo de estados financieros anuales incluye el Balance, la Cuenta de Resultados, el
+                  Estado de Flujos de Efectivo y las Notas.<br><br>Los estados financieros forman un conjunto
+                  inseparable y ofrecen una imagen fiel de los hechos, transacciones y circunstancias del ejercicio, con
+                  el fin de ofrecer una imagen fiel del patrimonio, la situación financiera y los resultados de la
+                  entidad.<br><br>Los estados financieros se elaboran y presentan de conformidad con las disposiciones
+                  de los artículos 25 a 34 siguientes, de forma que puedan compararse a lo largo del tiempo, año tras
+                  año, y con los estados financieros anuales de otras entidades, elaborados en las mismas condiciones de
+                  regularidad, equidad y comparabilidad.<br><br>Las entidades cuyos valores cotizan en bolsa y las que
+                  buscan financiación a través de una oferta pública deben elaborar y presentar estados financieros
+                  anuales de acuerdo con las Normas Internacionales de Información Financiera, conocidas como NIIF,
+                  además de los estados financieros mencionados en los párrafos anteriores.<br><br>Los estados
+                  financieros anuales elaborados con arreglo a las NIIF están destinados exclusivamente a los mercados
+                  financieros. Éstos no pueden utilizarse como base para determinar el beneficio distribuible a que se
+                  refiere la Ley Uniforme relativa a la Ley de Sociedades Comerciales y Agrupaciones de Interés
+                  Económico.</td>
+              </tr>
+              <tr>
+                <td>9</td>
+                <td>La imparcialidad y exactitud de la información presentada en los estados financieros anuales de la
+                  entidad resultan de una descripción adecuada, imparcial, clara, precisa y completa de los hechos,
+                  transacciones y condiciones relativos al ejercicio.<br><br>La comparabilidad de los estados
+                  financieros anuales a lo largo de ejercicios sucesivos exige coherencia en la terminología y los
+                  métodos utilizados para trazar los hechos, transacciones y situaciones presentados en dichos estados.
+                </td>
+              </tr>
+              <tr>
+                <td>10</td>
+                <td>Se considerará que toda entidad que aplique correctamente el Sistema de Contabilidad de la OHADA
+                  ofrece en sus estados financieros una imagen fiel de su situación y de sus operaciones, tal y como se
+                  exige en el artículo 8 anterior.<br><br>Cuando la aplicación de un requisito contable resulte
+                  insuficiente o inadecuada para ofrecer una imagen fiel, deberá facilitarse información adicional o las
+                  justificaciones necesarias en las notas de los estados financieros.</td>
+              </tr>
+              <tr>
+                <td>11</td>
+                <td>Los estados financieros anuales contemplados en el artículo 8 se hacen obligatorios, total o
+                  parcialmente, en función del tamaño de las entidades evaluadas según criterios relativos al volumen de
+                  negocios sin impuestos del ejercicio.<br><br>Los formatos de los estados financieros anuales y de la
+                  contabilidad permitidos por esta Ley Uniforme son el Sistema Normal y el Sistema Mínimo de
+                  Tesorería.<br><br>Todas las entidades están sujetas al régimen normal de presentación de estados
+                  financieros y llevanza de cuentas, salvo excepción derivada de su tamaño.</td>
+              </tr>
+              <tr>
+                <td>12</td>
+                <td>Derogado.</td>
+              </tr>
+              <tr>
+                <td>13</td>
+                <td>A menos que opten por no acogerse, las pequeñas entidades están sujetas al Sistema de Tesorería
+                  Mínima, abreviado SMT.<br><br>Pueden acogerse al régimen de tesorería mínima las entidades cuyas
+                  ventas anuales, impuestos excluidos, sean inferiores a los siguientes umbrales:<br>
+                  <ul><br>
+                    <li>Sesenta (60) millones de francos CFA o su equivalente en la unidad monetaria de curso legal en
+                      el Estado contratante, para las entidades comerciales;</li><br>
+                    <li>Cuarenta (40) millones de francos CFA o su equivalente en la unidad monetaria de curso legal en
+                      el Estado contratante, para las entidades artesanales y similares;</li><br>
+                    <li>Treinta (30) millones de francos CFA o su equivalente en la unidad monetaria de curso legal en
+                      el Estado contratante, para las entidades de servicios.</li>
+                  </ul>
+                </td>
+              </tr>
+              <tr>
+                <td>14</td>
+                <td>La organización contable establecida en la entidad debe cumplir los requisitos de regularidad y
+                  seguridad que garanticen la autenticidad de los asientos, de forma que la contabilidad pueda
+                  utilizarse tanto como instrumento de medición de los derechos y obligaciones de los socios de la
+                  entidad, como instrumento de prueba, de información a terceros y de gestión.</td>
+              </tr>
+              <tr>
+                <td>15</td>
+                <td>La organización contable debe garantizar:<br>
+                  <ul><br>
+                    <li>Un registro exhaustivo y cotidiano de la información básica sin demora;</li><br>
+                    <li>Un tratamiento puntual de los datos registrados;</li><br>
+                    <li>Facilitar a los usuarios los documentos requeridos dentro de los plazos legales establecidos
+                      para su expedición.</li>
+                  </ul>
+                </td>
+              </tr>
+              <tr>
+                <td>16</td>
+                <td>Para mantener la continuidad del acceso a la información a lo largo del tiempo, todas las entidades
+                  deben elaborar un manual que describa sus procedimientos y organización contables.<br><br>Este manual,
+                  que se actualiza periódicamente, tiene por objeto garantizar el registro definitivo de las
+                  operaciones. Se conserva mientras sea necesaria la presentación de los sucesivos estados financieros a
+                  los que se refiere.<br><br>Los movimientos que afectan a los activos de la entidad se registran en las
+                  cuentas, transacción por transacción, en el orden de su fecha de valor contable. Esta fecha es la
+                  fecha en la que la entidad emite el documento justificativo de la operación, la transacción, o el de
+                  la recepción de documentos externos. Las transacciones de la misma naturaleza realizadas en el mismo
+                  lugar y el mismo día pueden resumirse en un único justificante.<br><br>Los movimientos se resumen por
+                  periodos predeterminados, que no pueden ser superiores a un mes.<br><br>La entidad realiza un
+                  inventario físico de todos sus activos y pasivos, indicando la naturaleza, cantidad y valor de cada
+                  elemento en la fecha del inventario.<br><br>Los datos del inventario se organizan y almacenan de forma
+                  que se justifique el contenido de cada uno de los elementos patrimoniales identificados.</td>
+              </tr>
+              <tr>
+                <td>17</td>
+                <td>El sistema contable debe cumplir al menos las siguientes condiciones de regularidad y
+                  seguridad:<br><br>
+                  <ol>
+                    <li>La teneduría de la contabilidad en la lengua oficial y en la unidad monetaria de curso legal en
+                      el Estado contratante;</li><br>
+                    <li>La utilización de la técnica de la partida doble, que da lugar a un asiento que afecta al menos
+                      a dos cuentas, una de las cuales se carga y la otra se abona. Cuando se registra una transacción,
+                      el total de los importes cargados en las cuentas debe ser igual al total de los importes abonados
+                      en otras cuentas;</li><br>
+                    <li>La justificación de los asientos mediante documentos fechados, conservados, archivados en un
+                      orden definido en el manual descriptivo de los procedimientos y de la organización contable,
+                      susceptibles de servir como medios de prueba y que lleven las referencias de su registro en las
+                      cuentas;</li><br>
+                    <li>El cumplimiento del registro cronológico de las operaciones previsto en los apartados 3, 4 y 5
+                      del artículo 16 anterior;</li><br>
+                    <li>La identificación de cada uno de estos registros, especificando su origen y asignación, el
+                      contenido de la transacción a la que se refiere y las referencias del documento justificativo;
+                    </li><br>
+                    <li>El control del inventario de las existencias y valor de los activos, créditos y pasivos de la
+                      entidad, de conformidad con los apartados 6 y 7 del artículo 16 anterior;</li><br>
+                    <li>La utilización, a efectos la primera contabilidad de la entidad, de un plan contable normalizado
+                      que figura en el sistema contable OHADA;</li><br>
+                    <li>La llevanza obligatoria de libros u otros soportes autorizados y la aplicación de procedimientos
+                      de tratamiento aprobados, que permitan elaborar los estados financieros anuales a que se refiere
+                      el artículo 8 anterior.</li>
+                  </ol>
+                </td>
+              </tr>
+              <tr>
+                <td>18</td>
+                <td>Las cuentas del sistema contable OHADA se agrupan en categorías homogéneas denominadas
+                  clases.<br><br>Para la contabilidad financiera, las clases incluyen:<br><br>
+                  <ul>
+                    <li>Clases de cuentas patrimoniales;</li><br>
+                    <li>Clases de cuentas de gestión.</li><br>
+                  </ul>Cada clase se subdivide en cuentas identificadas por números de dos o más dígitos, según su grado
+                  de dependencia de cuentas de nivel superior, utilizando un sistema de codificación decimal.<br><br>El
+                  plan contable de cada entidad debe ser lo suficientemente detallado como para permitir el registro de
+                  las transacciones.<br><br>Cuando las cuentas previstas en el sistema contable OHADA no sean
+                  suficientes para que la entidad registre todas sus transacciones por separado, podrá abrir las
+                  subdivisiones necesarias.<br><br>Por el contrario, si las cuentas previstas por el sistema contable
+                  OHADA son demasiado detalladas para las necesidades de la entidad, ésta podrá agruparlas en una cuenta
+                  global al mismo nivel, pero más detallada, de acuerdo con las posibilidades ofrecidas por el sistema
+                  contable OHADA y siempre que la agrupación así efectuada permita al menos elaborar los estados
+                  financieros anuales en las condiciones prescritas.<br><br>Las operaciones se registran en las cuentas
+                  cuyas rúbricas corresponden a su naturaleza.
+                </td>
+              </tr>
+              <tr>
+                <td>19</td>
+                <td>Los libros de contabilidad y otros documentos que deben llevarse son:<br><br>
+                  <ul>
+                    <li>El libro diario, en el que se contabilizan los movimientos del ejercicio en las condiciones
+                      establecidas en el apartado 4 del artículo 17 anterior;</li><br>
+                    <li>El libro mayor, compuesto por todas las cuentas de la entidad, en el que se consignan o anotan
+                      simultáneamente en el diario, cuenta por cuenta, los distintos movimientos del ejercicio;</li><br>
+                    <li>El balance general de sumas y saldos, un estado recapitulativo que muestre, al final del
+                      ejercicio, para cada cuenta:</li><br>
+                    <ul>
+                      <li>El saldo deudor o acreedor al inicio del ejercicio;</li><br>
+                      <li>Movimientos de débito acumulados desde el inicio del ejercicio y movimientos de crédito
+                        acumulados;</li><br>
+                      <li>El saldo deudor o acreedor en la fecha en cuestión;</li><br>
+                    </ul>
+                    <li>El libro de inventario, que contiene el balance, la cuenta de resultados y el estado de
+                      tesorería de cada ejercicio, así como un resumen del inventario.</li><br>
+                  </ul>La elaboración del libro diario y del libro mayor puede verse facilitada por la llevanza de
+                  diarios y libros auxiliares, o de registros que los sustituyan, en función del tamaño y las
+                  necesidades de la entidad. En este caso, los totales de estos registros se centralizan periódicamente
+                  y al menos una vez al mes en el libro diario y el libro mayor, respectivamente.
+                </td>
+              </tr>
+              <tr>
+                <td>20</td>
+                <td>Los libros de contabilidad y demás registros deben llevarse sin espacios en blanco ni alteraciones
+                  de ningún tipo.<br><br>Si se comete un error y se descubre en el ejercicio en curso, se corrige
+                  exclusivamente anotando las partidas erróneas en negativo; a continuación se efectúa el asiento
+                  correcto.<br><br>La corrección de un error material cometido en un ejercicio anterior debe hacerse
+                  ajustando los beneficios no distribuidos.<br><br>Toda corrección de errores descubierta en el
+                  ejercicio en curso y cometida en ejercicios anteriores debe indicarse en las notas a los estados
+                  financieros.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <section id="tratamientos-contables" class="section bg-light">
+      <div class="container">
+        <h2 class="text-center mb-5">Tratamiento contable de operaciones</h2>
+        <div class="table-responsive">
+          <table id="tabla-tratamientos" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+              <tr>
+                <th>Concepto</th>
+                <th>Tratamiento</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <p>Compras almacenables y suministros</p>
+                </td>
+                <td>
+                  <ul>
+                    <li>
+                      <b>Compras almacenables</b>: Son las compras que son objeto de seguimiento (mantenimiento de
+                      fichas de
+                      stock o cuenta de almacén) cuyos existentes nuevos al cierre del ejercicio se inscriben en las
+                      cuentas de stocks correspondientes con como contrapartida la cuenta <i>603 Variación de stocks</i>
+                      (inventario intermitente).
+                    </li>
+                    <li>
+                      <b>Suministros</b>: Son todas las compras no almacenables por la naturaleza del elemento (agua,
+                      electricidad, otras energías) o no almacenadas por elección de la entidad (simplificación del
+                      inventario, coste de gestión) como aquellos relativos a suministros que no son objeto de
+                      seguimiento (mantenimiento de fichas de stocks) y cuyas existencias nuevas al cierre del ejercicio
+                      se inscriben en el débito de la cuenta <i>476 Gastos realizados por anticipado</i> por el crédito
+                      de las cuentas de gastos concernientes, para que el saldo de la cuenta de gasto represente las
+                      compras efectivamente consumidas durante el ejercicio.
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>Anuncios e inserciones publicitarias</p>
+                </td>
+                <td>
+                  <p>Los gastos de anuncios publicitarios en periódicos, revistas o en internet se registran al débito
+                    de la cuenta <i>6271 Anuncios, inserciones</i>.</p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>Ventajas en especie</p>
+                </td>
+                <td>
+                  <ul>
+                    <li>
+                      Las <b>ventajas en especie</b> de las que se beneficia el personal (vivienda, alimentación, uso de
+                      un
+                      vehículo, etc.) son registradas por la entidad en las distintas cuentas de gastos por naturaleza
+                      concernida (en general, cuentas <i>60</i> a <i>63</i>): <i>614 Transportes de personal</i>, <i>622
+                        Alquileres y cargas locativas</i>, <i>624 Mantenimiento, reparaciones y conservación</i>, <i>628
+                        Gastos de telecomunicaciones</i>, etc. Estas ventajas en especie son luego transferidas a final
+                      de ejercicio en los gastos de personal al débito de la cuenta <i>6617 Ventajas en especie,
+                        personal nacional</i> o <i>6627 Ventajas en especie, personal no nacional</i> por el crédito de
+                      la cuenta <i>781 Transferencias de gastos de explotación</i>.
+                    </li>
+                    <li>
+                      <b>Autoconsumo</b>: Los consumos retirados de la producción de la explotación, sin contrapartida
+                      monetaria, por los empleados se registran al débito de la cuenta <i>6617</i> o <i>6627</i> por el
+                      crédito de la cuenta <i>724 Producción autoconsumida</i>.
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>Bienes de escaso valor</p>
+                </td>
+                <td>
+                  <p>Los elementos de activo que responden a la definición de inmovilizado cuyos valores no son
+                    significativos (bienes de escaso valor) pueden ser contabilizados en gastos del ejercicio. Nota:
+                    Ningún umbral está fijado por el SYSCOHADA, es usual referirse al umbral eventualmente fijado por la
+                    legislación fiscal nacional (por ejemplo en Costa de Marfil, inmovilizado cuyo precio unitario no
+                    excede 300.000 XAF).</p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>Regalos a la clientela</p>
+                </td>
+                <td>
+                  <ul>
+                    <li>
+                      Para los <b>productos de la entidad ofrecidos a los clientes</b>: A título de gastos iniciales: se
+                      registran en las cuentas <i>601 Compras de mercancías</i> o, para los productos fabricados, en las
+                      distintas cuentas de gastos por naturaleza. A título de entrega de los productos a la clientela:
+                      si el valor del regalo ofrecido es un componente de la factura, esta puede ser contabilizada
+                      distintamente en la cuenta <i>7078 Otros productos accesorios</i>, por el contrario, si el regalo
+                      es un suplemento ofrecido al cliente que no figura en la factura, solo el importe de la factura
+                      será registrado en la cuenta <i>70 Ventas</i>. No es por tanto necesario en principio transferir
+                      el valor del regalo ofrecido a la cuenta <i>6276 Regalos a la clientela</i>. Sin embargo, para
+                      justificar en las cuentas el impacto sobre el margen de beneficio, el valor del regalo ofrecido
+                      puede ser transferido al débito de la cuenta <i>6276 Regalos a la clientela</i> por el crédito de
+                      la cuenta <i>781 Transferencia de gastos de explotación</i>.
+                    </li>
+                    <li>
+                      Para los <b>productos ofrecidos diferentes de los de la entidad</b>: Conviene en este caso
+                      utilizar la
+                      cuenta <i>6276 Regalos a la clientela</i> para los regalos comprados a terceros. Por el contrario,
+                      para aquellos fabricados por la entidad misma, los distintos gastos incurridos son desglosados,
+                      según su naturaleza en las cuentas de gastos y luego transferidos al débito de la cuenta <i>6273
+                        Muestras</i> por el crédito de la cuenta <i>781 Transferencia de gastos de explotación</i>. Al
+                      cierre del ejercicio, el coste de los artículos no distribuidas se registra en gastos realizados
+                      por anticipado.
+                    </li>
+                    <li>
+                      Para las <b>prestaciones de servicios ofrecidas</b>: Cuando la prestación de servicios es
+                      realizada por un tercero, el coste de la prestación es directamente registrado al débito de la
+                      cuenta <i>6276 Regalos a la clientela</i>. Por el contrario, cuando la prestación es realizada por
+                      la entidad, el coste de la prestación será previamente registrado en las distintas cuentas de
+                      gastos por naturaleza y luego transferido al débito de la cuenta <i>6276 Regalos a la
+                        clientela</i> por el crédito de la cuenta <i>781 Transferencia de gastos de explotación</i>.
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>Tarjetas de visita, flyers, camisetas y gadgets publicitarios, etc.</p>
+                </td>
+                <td>
+                  <p>Las tarjetas de visita, flyers, prospectos, folletos, camisetas, gadgets publicitarios, papel
+                    adquirido con fines publicitarios, etc. son registrados al débito de la cuenta <i> 6272 Catálogos,
+                      impresos publicitarios</i> teniendo en cuenta su naturaleza publicitaria.</p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>Gastos de copropiedad</p>
+                </td>
+                <td>
+                  <p>Cuando una entidad es copropietaria de un inmueble, la cuota parte de gastos descontados por el
+                    administrador de la copropiedad es globalmente asimilada a un gasto locativo (excepto si el desglose
+                    de gastos por naturaleza parece más pertinente teniendo en cuenta su carácter significativo) e
+                    inscrita al débito de la cuenta <i>6385 Gastos de copropiedad</i> a excepción de los gastos de
+                    mantenimiento y reparaciones que hay que inscribir al débito de la cuenta <i>6241 Mantenimiento y
+                      reparaciones</i> de los bienes inmuebles. En caso de alquiler a un tercero por el copropietario,
+                    la parte de los gastos de copropiedad recuperada sobre el inquilino debe ser transferida al débito
+                    de la cuenta de terceros por el crédito de la cuenta <i>781 Transferencia de gastos de
+                      explotación.</i>.</p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>Comisiones e intereses bancarios</p>
+                </td>
+                <td>
+                  <ul>
+                    <li>
+                      Los <b>intereses relacionados con los capitales prestado</b>s incluyendo la prima de seguros
+                      eventual (préstamos, descubierto, cuentas corrientes acreedoras, etc.) a cargo de la entidad son
+                      contabilizados al débito de las subcuentas de la cuenta <i>67 Gastos financieros</i>. Estos gastos
+                      representando la remuneración del dinero prestado son proporcionales al importe de una deuda y a
+                      la duración y dependen del tipo de interés.
+                    </li>
+                    <li>
+                      Por el contrario, las <b>comisiones bancarias que representan la remuneración de un servicio
+                        proporcionado por el banco </b>(por ejemplo, gastos de mantenimiento de cuenta, comisiones sobre
+                      efecto de comercio, de factoring o por apertura de crédito, tarjeta de crédito, instrumentos de
+                      pago en moneda electrónica) son registradas al débito de la cuenta <i>631 Gastos bancarios.
+                      </i>.
+                    </li>
+                    <li>
+                      Los <b>intereses de retrasos de pago de impuestos</b> corresponden a la cuenta <i>647
+                        Penalizaciones, multas fiscales.
+                      </i>.
+                    </li>
+                    <li>
+                      <b>Instrumentos de moneda electrónica</b>: los gastos relativos a las operaciones (depósitos y
+                      retiradas de dinero, transferencias de dinero, pago de facturas de teléfono, electricidad, agua,
+                      carburante...) realizadas por instrumentos de moneda electrónica son registrados al débito de la
+                      cuenta <i>6317 Gastos sobre instrumentos moneda electrónica</i>.
+                    </li>
+                    <li>
+                      <b>Descuento de efectos comerciales</b>: los gastos bancarios (intereses y comisiones) soportados
+                      durante una operación de descuento de efectos de comercio son globalmente registrados al débito de
+                      la cuenta <i>675 Descuentos de efectos comerciales</i>.
+                    </li>
+                    <li>
+                      <b>Incorporación de los costes de préstamos</b>: cuando un activo es cualificado para la
+                      capitalización de los costes de préstamo (activo que exige un largo período de preparación), los
+                      intereses intercalares debidos sobre el período de preparación son primero contabilizados al
+                      débito de la cuenta <i>67 Gastos financieros</i>, luego transferidos al débito de la cuenta de
+                      activo
+                      concernido por el crédito de la cuenta <i>787 Transferencia de gastos financieros</i>.
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>Comisiones pagadas a los miembros del personal</p>
+                </td>
+                <td>
+                  <p>Las comisiones pagadas a los miembros del personal forman parte del salario bruto imponible y son
+                    por tanto registradas en las subcuentas de la cuenta <i>66 Cargas de personal</i>.</p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>Vacaciones pagadas, primas y gratificaciones</p>
+                </td>
+                <td>
+                  <p>Vacaciones pagadas:</p>
+                  <ul>
+                    <li>Al cierre del ejercicio: el importe bruto de los derechos a vacaciones pagadas adquiridos por
+                      los empleados de la entidad constituye un gasto a pagar (y no una provisión, porque existe una
+                      baja
+                      incertidumbre sobre el importe y el vencimiento) y es registrado al débito de la cuenta
+                      <i>6613</i> y/o
+                      <i>6623 Permisos retribuídos</i> por el crédito de la cuenta <i>4281 Deudas provisionadas para
+                        vacaciones a
+                        pagar</i>. Las cargas sociales y fiscales patronales ligadas a las vacaciones pagadas son
+                      inscritas en
+                      las cuentas de gastos por naturaleza concernidas con como contrapartida las cuentas <i>
+                        4382 Cargas
+                        sociales sobre vacaciones a pagar
+                      </i> y una subcuenta de la cuenta <i>4486</i> para las cargas fiscales sobre
+                      vacaciones a pagar.
+                    </li>
+                    <li>Al inicio del ejercicio siguiente: estos asientos serán contrapasados.</li>
+                    <li>En el momento de la toma de las vacaciones pagadas: la parte de las vacaciones pagadas en el
+                      salario bruto total es registrada distintamente al débito de la cuenta <i>6613</i> y/o <i>6623
+                        Vacaciones pagadas</i> por el crédito de la cuenta <i>422 Personal, remuneraciones debidas</i>.
+                    </li>
+                  </ul>
+                  <p>Primas y gratificaciones:</p>
+                  <ul>
+                    <li>Al cierre del ejercicio: el importe estimado de las primas anuales y gratificaciones constituye
+                      un gasto a pagar y es registrado al débito de la cuenta <i>6612 Primas y gratificaciones</i>.</li>
+                    <li>Al inicio del ejercicio siguiente: este asiento será contrapasado.</li>
+                    <li>En el momento de su pago: el importe de las primas y gratificaciones será inscrito al débito de
+                      la cuenta <i>6612 Primas y gratificaciones</i>.</li>
+                  </ul>
+                  <p>Nota: durante la determinación del resultado fiscal, hay que tener en cuenta el carácter no
+                    deducible de las "provisiones para vacaciones pagadas" del ejercicio según la legislación fiscal
+                    nacional.</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <section id="ejemplos" class="section">
+      <div class="container">
+        <h2 class="text-center mb-5">Ejemplos de Asientos Contables</h2>
+        <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation"><button class="nav-link active" data-bs-toggle="tab"
+              data-bs-target="#apertura" type="button">Apertura</button></li>
+          <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab"
+              data-bs-target="#compras" type="button">Compras</button></li>
+          <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab"
+              data-bs-target="#ventas" type="button">Ventas</button></li>
+          <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab"
+              data-bs-target="#gastos" type="button">Gastos</button></li>
+          <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab"
+              data-bs-target="#nomina" type="button">Nóminas</button></li>
+          <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab"
+              data-bs-target="#amortizacion" type="button">Amortización</button></li>
+          <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#iva"
+              type="button">Liquidación IVA</button></li>
+          <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab"
+              data-bs-target="#cierre" type="button">Cierre y Resultado</button></li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="apertura" role="tabpanel">
+            <h4 class="mt-4">Asiento de Apertura</h4>
+            <p>Los socios constituyen la sociedad aportando 10.000.000 XAF, que ingresan en la cuenta bancaria.</p>
+            <table class="table table-bordered asiento-table">
+              <thead>
+                <tr>
+                  <th>CÓDIGO</th>
+                  <th>CUENTA</th>
+                  <th>DEBE</th>
+                  <th>HABER</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>521</td>
+                  <td>Bancos</td>
+                  <td>10.000.000</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>101</td>
+                  <td>Capital Social</td>
+                  <td></td>
+                  <td>10.000.000</td>
+                </tr>
+                <tr class="total-row">
+                  <td></td>
+                  <td>TOTAL:</td>
+                  <td>10.000.000</td>
+                  <td>10.000.000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="compras" role="tabpanel">
+            <h4 class="mt-4">Compra de Mercaderías</h4>
+            <p>Se compran mercaderías por valor de 1.000.000 XAF + 15% IVA.</p>
+            <h6>1. Compra a crédito</h6>
+            <table class="table table-bordered asiento-table">
+              <thead>
+                <tr>
+                  <th>CÓDIGO</th>
+                  <th>CUENTA</th>
+                  <th>DEBE</th>
+                  <th>HABER</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>601</td>
+                  <td>Compra de mercaderías</td>
+                  <td>1.000.000</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>445</td>
+                  <td>Estado, IVA recuperable (soportado)</td>
+                  <td>150.000</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>401</td>
+                  <td>Proveedores</td>
+                  <td></td>
+                  <td>1.150.000</td>
+                </tr>
+                <tr class="total-row">
+                  <td></td>
+                  <td>TOTAL:</td>
+                  <td>1.150.000</td>
+                  <td>1.150.000</td>
+                </tr>
+              </tbody>
+            </table>
+            <h6 class="mt-3">2. Pago al proveedor (contado)</h6>
+            <table class="table table-bordered asiento-table">
+              <thead>
+                <tr>
+                  <th>CÓDIGO</th>
+                  <th>CUENTA</th>
+                  <th>DEBE</th>
+                  <th>HABER</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>401</td>
+                  <td>Proveedores</td>
+                  <td>1.150.000</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>521</td>
+                  <td>Bancos</td>
+                  <td></td>
+                  <td>1.150.000</td>
+                </tr>
+                <tr class="total-row">
+                  <td></td>
+                  <td>TOTAL:</td>
+                  <td>1.150.000</td>
+                  <td>1.150.000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="ventas" role="tabpanel">
+            <h4 class="mt-4">Venta de Mercaderías</h4>
+            <p>Se venden mercaderías por valor de 2.000.000 XAF + 15% IVA.</p>
+            <h6>1. Venta a crédito</h6>
+            <table class="table table-bordered asiento-table">
+              <thead>
+                <tr>
+                  <th>CÓDIGO</th>
+                  <th>CUENTA</th>
+                  <th>DEBE</th>
+                  <th>HABER</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>411</td>
+                  <td>Clientes</td>
+                  <td>2.300.000</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>701</td>
+                  <td>Venta de mercaderías</td>
+                  <td></td>
+                  <td>2.000.000</td>
+                </tr>
+                <tr>
+                  <td>443</td>
+                  <td>Estado, IVA facturado (repercutido)</td>
+                  <td></td>
+                  <td>300.000</td>
+                </tr>
+                <tr class="total-row">
+                  <td></td>
+                  <td>TOTAL:</td>
+                  <td>2.300.000</td>
+                  <td>2.300.000</td>
+                </tr>
+              </tbody>
+            </table>
+            <h6 class="mt-3">2. Cobro del cliente (contado)</h6>
+            <table class="table table-bordered asiento-table">
+              <thead>
+                <tr>
+                  <th>CÓDIGO</th>
+                  <th>CUENTA</th>
+                  <th>DEBE</th>
+                  <th>HABER</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>521</td>
+                  <td>Bancos</td>
+                  <td>2.300.000</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>411</td>
+                  <td>Clientes</td>
+                  <td></td>
+                  <td>2.300.000</td>
+                </tr>
+                <tr class="total-row">
+                  <td></td>
+                  <td>TOTAL:</td>
+                  <td>2.300.000</td>
+                  <td>2.300.000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="gastos" role="tabpanel">
+            <h4 class="mt-4">Pago de Gastos</h4>
+            <p>Se pagan por banco las facturas de suministros del mes.</p>
+            <h6>1. Factura eléctrica: 50.000 XAF + 15% IVA</h6>
+            <table class="table table-bordered asiento-table">
+              <thead>
+                <tr>
+                  <th>CÓDIGO</th>
+                  <th>CUENTA</th>
+                  <th>DEBE</th>
+                  <th>HABER</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>6052</td>
+                  <td>Suministros no almacenables - Electricidad</td>
+                  <td>50.000</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>445</td>
+                  <td>Estado, IVA recuperable</td>
+                  <td>7.500</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>521</td>
+                  <td>Bancos</td>
+                  <td></td>
+                  <td>57.500</td>
+                </tr>
+                <tr class="total-row">
+                  <td></td>
+                  <td>TOTAL:</td>
+                  <td>57.500</td>
+                  <td>57.500</td>
+                </tr>
+              </tbody>
+            </table>
+            <h6 class="mt-3">2. Factura de teléfono e internet: 30.000 XAF + 15% IVA</h6>
+            <table class="table table-bordered asiento-table">
+              <thead>
+                <tr>
+                  <th>CÓDIGO</th>
+                  <th>CUENTA</th>
+                  <th>DEBE</th>
+                  <th>HABER</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>628</td>
+                  <td>Gastos de telecomunicaciones</td>
+                  <td>30.000</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>445</td>
+                  <td>Estado, IVA recuperable</td>
+                  <td>4.500</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>521</td>
+                  <td>Bancos</td>
+                  <td></td>
+                  <td>34.500</td>
+                </tr>
+                <tr class="total-row">
+                  <td></td>
+                  <td>TOTAL:</td>
+                  <td>34.500</td>
+                  <td>34.500</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="nomina" role="tabpanel">
+            <h4 class="mt-4">Asiento de Nómina</h4>
+            <p>Se contabiliza la nómina de un empleado con salario base de 500.000 XAF.</p>
+            <ul class="list-unstyled">
+              <li>Seguridad Social (Trabajador 4.5%): 22.500</li>
+              <li>Seguridad Social (Empresa 21.5%): 107.500</li>
+              <li>Líquido a percibir: 477.500</li>
+            </ul>
+            <h6>1. Devengo de la nómina</h6>
+            <table class="table table-bordered asiento-table">
+              <thead>
+                <tr>
+                  <th>CÓDIGO</th>
+                  <th>CUENTA</th>
+                  <th>DEBE</th>
+                  <th>HABER</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>661</td>
+                  <td>Remuneraciones del personal</td>
+                  <td>500.000</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>664</td>
+                  <td>Cargas sociales</td>
+                  <td>107.500</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>431</td>
+                  <td>Seguridad Social</td>
+                  <td></td>
+                  <td>130.000</td>
+                </tr>
+                <tr>
+                  <td>421</td>
+                  <td>Personal, remuneraciones pendientes</td>
+                  <td></td>
+                  <td>477.500</td>
+                </tr>
+                <tr class="total-row">
+                  <td></td>
+                  <td>TOTAL:</td>
+                  <td>607.500</td>
+                  <td>607.500</td>
+                </tr>
+              </tbody>
+            </table>
+            <h6 class="mt-3">2. Pago de la nómina</h6>
+            <table class="table table-bordered asiento-table">
+              <thead>
+                <tr>
+                  <th>CÓDIGO</th>
+                  <th>CUENTA</th>
+                  <th>DEBE</th>
+                  <th>HABER</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>421</td>
+                  <td>Personal, remuneraciones pendientes</td>
+                  <td>477.500</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>521</td>
+                  <td>Bancos</td>
+                  <td></td>
+                  <td>477.500</td>
+                </tr>
+                <tr class="total-row">
+                  <td></td>
+                  <td>TOTAL:</td>
+                  <td>477.500</td>
+                  <td>477.500</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="amortizacion" role="tabpanel">
+            <h4 class="mt-4">Amortización de Inmovilizado</h4>
+            <p>Se dota la amortización anual de un vehículo (inmovilizado material) que costó 5.000.000 XAF, con una
+              vida útil de 5 años (amortización lineal del 20%).</p>
+            <p>Cuota anual: 5.000.000 * 20% = 1.000.000 XAF</p>
+            <table class="table table-bordered asiento-table">
+              <thead>
+                <tr>
+                  <th>CÓDIGO</th>
+                  <th>CUENTA</th>
+                  <th>DEBE</th>
+                  <th>HABER</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>681</td>
+                  <td>Dotaciones a las amortizaciones del inmovilizado</td>
+                  <td>1.000.000</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>2845</td>
+                  <td>Amortización del material de transporte</td>
+                  <td></td>
+                  <td>1.000.000</td>
+                </tr>
+                <tr class="total-row">
+                  <td></td>
+                  <td>TOTAL:</td>
+                  <td>1.000.000</td>
+                  <td>1.000.000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="iva" role="tabpanel">
+            <h4 class="mt-4">Liquidación de IVA</h4>
+            <p>Con los datos de los ejemplos anteriores:</p>
+            <ul class="list-unstyled">
+              <li>IVA Repercutido (ventas): 300.000</li>
+              <li>IVA Soportado (compras + gastos): 150.000 + 7.500 + 4.500 = 162.000</li>
+              <li>Resultado a pagar: 300.000 - 162.000 = 138.000</li>
+            </ul>
+            <table class="table table-bordered asiento-table">
+              <thead>
+                <tr>
+                  <th>CÓDIGO</th>
+                  <th>CUENTA</th>
+                  <th>DEBE</th>
+                  <th>HABER</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>443</td>
+                  <td>Estado, IVA facturado</td>
+                  <td>300.000</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>445</td>
+                  <td>Estado, IVA recuperable</td>
+                  <td></td>
+                  <td>162.000</td>
+                </tr>
+                <tr>
+                  <td>444</td>
+                  <td>Estado, IVA por pagar</td>
+                  <td></td>
+                  <td>138.000</td>
+                </tr>
+                <tr class="total-row">
+                  <td></td>
+                  <td>TOTAL:</td>
+                  <td>300.000</td>
+                  <td>300.000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="cierre" role="tabpanel">
+            <h4 class="mt-4">Asiento de Regularización, Impuesto y Reparto de Resultados (OHADA)</h4>
+            <p>Ejemplo completo de cierre contable según el Plan OHADA, incluyendo regularización, impuesto sobre
+              beneficios (25%) y reparto de dividendos.</p>
+            <h6>1. Regularización de Ingresos y Gastos</h6>
+            <table class="table table-bordered asiento-table">
+              <thead>
+                <tr>
+                  <th>CÓDIGO</th>
+                  <th>CUENTA</th>
+                  <th>DEBE</th>
+                  <th>HABER</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>70</td>
+                  <td>Ventas de mercaderías</td>
+                  <td>10.000.000</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>60</td>
+                  <td>Compras y otros gastos</td>
+                  <td></td>
+                  <td>7.500.000</td>
+                </tr>
+                <tr>
+                  <td>12</td>
+                  <td>Resultado del ejercicio</td>
+                  <td></td>
+                  <td>2.500.000</td>
+                </tr>
+                <tr class="total-row">
+                  <td></td>
+                  <td>TOTAL:</td>
+                  <td>10.000.000</td>
+                  <td>10.000.000</td>
+                </tr>
+              </tbody>
+            </table>
+            <h6 class="mt-3">2. Impuesto sobre Beneficios (25%)</h6>
+            <table class="table table-bordered asiento-table">
+              <thead>
+                <tr>
+                  <th>CÓDIGO</th>
+                  <th>CUENTA</th>
+                  <th>DEBE</th>
+                  <th>HABER</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>89</td>
+                  <td>Impuesto sobre beneficios</td>
+                  <td>625.000</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>44</td>
+                  <td>Estado, Impuesto sobre beneficios</td>
+                  <td></td>
+                  <td>625.000</td>
+                </tr>
+                <tr class="total-row">
+                  <td></td>
+                  <td>TOTAL:</td>
+                  <td>625.000</td>
+                  <td>625.000</td>
+                </tr>
+              </tbody>
+            </table>
+            <h6 class="mt-3">3. Resultado Neto del Ejercicio</h6>
+            <table class="table table-bordered asiento-table">
+              <thead>
+                <tr>
+                  <th>CÓDIGO</th>
+                  <th>CUENTA</th>
+                  <th>DEBE</th>
+                  <th>HABER</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>12</td>
+                  <td>Resultado del ejercicio</td>
+                  <td>2.500.000</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>13</td>
+                  <td>Resultados pendientes de distribución</td>
+                  <td></td>
+                  <td>2.500.000</td>
+                </tr>
+                <tr class="total-row">
+                  <td></td>
+                  <td>TOTAL:</td>
+                  <td>2.500.000</td>
+                  <td>2.500.000</td>
+                </tr>
+              </tbody>
+            </table>
+            <h6 class="mt-3">4. Reparto de Beneficios</h6>
+            <table class="table table-bordered asiento-table">
+              <thead>
+                <tr>
+                  <th>CÓDIGO</th>
+                  <th>CUENTA</th>
+                  <th>DEBE</th>
+                  <th>HABER</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>13</td>
+                  <td>Resultados pendientes de distribución</td>
+                  <td>1.875.000</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>11</td>
+                  <td>Reserva legal (10%)</td>
+                  <td></td>
+                  <td>187.500</td>
+                </tr>
+                <tr>
+                  <td>457</td>
+                  <td>Dividendos a pagar (50%)</td>
+                  <td></td>
+                  <td>937.500</td>
+                </tr>
+                <tr>
+                  <td>118</td>
+                  <td>Reservas voluntarias (40%)</td>
+                  <td></td>
+                  <td>750.000</td>
+                </tr>
+                <tr class="total-row">
+                  <td></td>
+                  <td>TOTAL:</td>
+                  <td>1.875.000</td>
+                  <td>1.875.000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="enlaces" class="section bg-light">
+      <div class="container">
+        <h2 class="text-center mb-5">Enlaces de Interés</h2>
+        <div class="row justify-content-center">
+          <div class="col-md-5 mb-4">
+            <div class="card h-100 text-center">
+              <div class="card-body">
+                <img src="img/ohada.org.png" alt="OHADA Official Logo" class="mb-3" style="height: 60px;">
+                <h5 class="card-title">Sitio Oficial de la OHADA</h5>
+                <p class="card-text">Portal oficial de la Organización para la Armonización del Derecho Mercantil en
+                  África</p>
+                <a href="https://www.ohada.org/es/" target="_blank" class="btn btn-primary">Visitar sitio</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-5 mb-4">
+            <div class="card h-100 text-center">
+              <div class="card-body">
+                <img src="img/ohada.com.png" alt="OHADA.com Logo" class="mb-3" style="height: 60px;">
+                <h5 class="card-title">Portal OHADA.com</h5>
+                <p class="card-text">Recursos e Información adicional sobre el Sistema Contable OHADA</p>
+                <a href="https://www.ohada.com/" target="_blank" class="btn btn-primary">Visitar sitio</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="registro" class="section bg-light">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <h2 class="text-center mb-4">Manténte Informado</h2>
+            <p class="text-center text-muted mb-5">Regístrate y accede a contenidos exclusivos.</p>
+            <form id="registroForm">
+              <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre Completo</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" required>
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Correo Electrónico</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+              </div>
+              <div class="mb-3">
+                <label for="mensaje" class="form-label">Mensaje</label>
+                <textarea class="form-control" id="mensaje" name="mensaje" rows="4"></textarea>
+              </div>
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary btn-lg">Enviar</button>
+              </div>
+            </form>
+            <div id="form-message" class="mt-3 text-center"></div>
+          </div>
+          <script>
+            document.getElementById('registroForm').addEventListener('submit', function (event) {
+              event.preventDefault();
+              const form = event.target;
+              const formData = new FormData(form);
+              const messageDiv = document.getElementById('form-message');
+
+              fetch('db/save_contact.php', {
+                method: 'POST',
+                body: formData
+              })
+                .then(response => response.json())
+                .then(data => {
+                  if (data.success) {
+                    messageDiv.innerHTML = '<span class="text-success">✅ ¡Registro enviado con éxito!</span>';
+                    form.reset();
+                  } else {
+                    messageDiv.innerHTML = `<span class="text-danger">❌ Error: ${data.message}</span>`;
+                  }
+                })
+                .catch(error => {
+                  messageDiv.innerHTML = '<span class="text-danger">❌ Hubo un problema al enviar el registro.</span>';
+                  console.error('Error:', error);
+                });
+            });
+          </script>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Denis Nzang Camps. Todos los derechos reservados.</p>
+      <p>Para consultas, contáctenos en
+        <a href="mailto:sti.bata@gmail.com">sti.bata@gmail.com</a>
+        <a>+240 555 250651</a>
+      </p>
+      <p class="mt-2"><strong>Visitas a esta página:</strong><span id="contador-visitas">Cargando...</span></p>
+    </div>
+  </footer>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/pdfmake.min.js"></script>
+  <script src="js/vfs_fonts.js"></script>
+  <script src="js/dataTables.js"></script>
+  <script src="js/dataTables.bootstrap5.js"></script>
+  <script src="js/dataTables.buttons.js"></script>
+  <script src="js/buttons.bootstrap5.js"></script>
+  <script src="js/jszip.min.js"></script>
+  <script src="js/buttons.html5.min.js"></script>
+  <script src="js/buttons.print.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      const spanishLanguage = {
+        "sProcessing": "Procesando...",
+        "sLengthMenu": "Mostrar _MENU_ registros",
+        "sZeroRecords": "No se encontraron resultados",
+        "sEmptyTable": "Ningún dato disponible en esta tabla",
+        "sInfo": "Mostrando del _START_ al _END_ de un total de _TOTAL_ registros",
+        "sInfoEmpty": "Mostrando del 0 al 0 de un total de 0 registros",
+        "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+        "sInfoPostFix": "",
+        "sSearch": "Buscar:",
+        "sUrl": "",
+        "sInfoThousands": ",",
+        "sLoadingRecords": "Cargando...",
+        "oPaginate": {
+          "sFirst": "Primero",
+          "sLast": "Último",
+          "sNext": "Siguiente",
+          "sPrevious": "Anterior"
+        },
+        "oAria": {
+          "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+          "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+        },
+        "buttons": {
+          "copy": "Copiar",
+          "colvis": "Visibilidad",
+          "print": "Imprimir",
+          "pdf": "PDF"
+        }
+      };
+      const commonTableOptions = {
+        layout: {
+          topStart: 'pageLength',
+          topEnd: {
+            buttons: ['pdf', 'print']
+          },
+          bottomStart: 'info',
+          bottomEnd: 'paging'
+        },
+        language: spanishLanguage,
+        ordering: false,
+        responsive: true
+      };
+      $('#tabla-cuentas').DataTable(commonTableOptions);
+      $('#tabla-articulos').DataTable(commonTableOptions);
+      $('#tabla-tratamientos').DataTable(commonTableOptions);
+
+      const scrollSpy = new bootstrap.ScrollSpy(document.body, {
+        target: '#navbarNav',
+        offset: 100
+      });
+
+      function actualizarContadorVisitas() {
+        fetch('db/contador.php')
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById('contador-visitas').innerText = data;
+          })
+          .catch(error => {
+            console.error('Error al cargar el contador de visitas:', error);
+            document.getElementById('contador-visitas').innerText = 'N/D';
+          });
+      }
+      actualizarContadorVisitas();
+    });
+  </script>
+</body>
+
+</html>
